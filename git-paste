@@ -1,0 +1,3 @@
+cd /home/stuin/Downloads
+url=$(xsel)
+git clone "$url"

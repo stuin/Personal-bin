@@ -1,0 +1,11 @@
+text="$1"
+
+for var in "$@" 
+do
+	if [ $var != $text ]
+	then
+		text="$text+$var"
+	fi
+done
+
+w3m https://google.com/search?q=$text
