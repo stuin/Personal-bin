@@ -1,3 +1,5 @@
+term="lxterminal -e"
+
 hex() {
 	#Random hex values with some selected
 	while true; 
@@ -72,7 +74,7 @@ then
 	sleep 1
 	
 	echo "Starting key check:"
-	st -e start-program.sh -h & hexid=$!
+	$term start-program.sh -h & hexid=$!
 	sleep 5
 
 	echo "Possible keys found. Continuing process."
@@ -84,15 +86,15 @@ then
 	sleep 1
 
 	echo "Checking processes."
-	st -e htop & hid=$!
+	$term htop & hid=$!
 	sleep 3
 	
 	echo "Activating main system."
-	sudo st -e start-program.sh -l & logid=$!
+	sudo $term start-program.sh -l & logid=$!
 	sleep 5
 
 	echo "System fully syncronized. Matrix reached."
-	st -e cmatrix & matrixid=$!
+	$term cmatrix & matrixid=$!
 	sleep 3
 	
 	echo "Processes linked. Press enter to clear"
@@ -106,6 +108,9 @@ then
 	kill $matrixid
 	echo "Matrix connection lost."
 	sleep 2
+
+	kill $logid
+	sleep 1
 
 	kill $hid
 	echo "Clearing process log."
