@@ -6,6 +6,8 @@ raw=$(curl -L https://steamdb.info/app/$id | grep -o "<title>[^·]*\|<img class=
 title=$(echo $raw | cut -d '<' -f2 | sed 's/title>//')
 image=$(echo $raw | cut -d '<' -f3 | awk '{print $4}' | sed 's/src=\"//' | sed 's/\"//')
 
+title=${title//\/}
+
 echo "Setting up $title"
 
 #Define base file paths
