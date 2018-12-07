@@ -1,3 +1,10 @@
+#Set starting location
+start=0
+if [ $# -eq 1 ]
+then
+	start=$1
+fi
+
 #Ouput location
 output="icons"
 
@@ -5,24 +12,37 @@ output="icons"
 rawapps=$(curl https://api.steampowered.com/ISteamApps/GetAppList/v2)
 IFS='}'
 read -r -a apps <<< "$rawapps"
+len=${#apps[*]}
 
-echo "Starting list"
+echo "Starting list - $(($len - $start))"
 
 #Loop through each
-for app in "${apps[@]}"
+for (( i = $start; i < $(($len - $start)); i++))
 do
 	#Parse name and id
+	app=${apps[$i]}
 	name=$(echo $app | grep -o "name\":\"[^\"]*" | sed 's/name\":\"//')
 	id=$(echo $app | grep -o "appid\":[^,]*" | sed 's/appid\"://')
 
+	#Displaying space and app name
 	echo ""
 	echo ""
 	echo "Loading - $name - $id"
-	
-	#Get ico url from site
-	imagecode=$(curl -L https://steamdb.info/app/$id | grep -o ".ico\" rel[^<]*" | sed 's/.ico\" rel=\"nofollow\">//')
-	echo "Found image - $imagecode"
 
-	#Download ico from site
-	curl -o "$output/$id.ico" "https://steamcdn-a.opskins.media/steamcommunity/public/images/apps/$id/$imagecode.ico"
+	#Check if file already exists
+	if [ -e "$output/$id.ico" ]
+	then
+		echo "Skipped"
+	else
+		#Get ico url from site
+		imagecode=$(curl -L https://steamdb.info/app/$id | grep -o ".ico\" rel[^<]*" | sed 's/.ico\" rel=\"nofollow\">//')
+
+		#Check if ico exists
+		if [ ! -z "$imagecode" ]
+		then
+			#Download ico from site
+			echo "Found image - $imagecode"
+			curl -o "$output/$id.ico" "https://steamcdn-a.opskins.media/steamcommunity/public/images/apps/$id/$imagecode.ico"
+		fi
+	fi
 done
