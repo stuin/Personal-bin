@@ -7,6 +7,7 @@ fi
 
 #Ouput location
 output="icons"
+missing="icons/missing"
 
 #Get separated app list
 rawapps=$(curl https://api.steampowered.com/ISteamApps/GetAppList/v2)
@@ -30,7 +31,7 @@ do
 	echo "Loading - $name - $id"
 
 	#Check if file already exists
-	if [ -e "$output/$id.ico" ]
+	if [ -e "$output/$id.ico" ] || [ -e "$missing/$id" ]
 	then
 		echo "Skipped"
 	else
@@ -43,6 +44,8 @@ do
 			#Download ico from site
 			echo "Found image - $imagecode"
 			curl -o "$output/$id.ico" "https://steamcdn-a.opskins.media/steamcommunity/public/images/apps/$id/$imagecode.ico"
+		else
+			echo "Image not found" >> "$missing/$id"
 		fi
 	fi
 done
