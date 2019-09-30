@@ -1,0 +1,2 @@
+screen -S mcs -X hardcopy /tmp/screen-copy
+tail -n$1 /tmp/screen-copy

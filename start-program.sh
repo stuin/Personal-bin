@@ -1,4 +1,4 @@
-term="lxterminal -e"
+term="xfce4-terminal -x"
 
 hex() {
 	#Random hex values with some selected
@@ -108,9 +108,6 @@ then
 	kill $matrixid
 	echo "Matrix connection lost."
 	sleep 2
-
-	kill $logid
-	sleep 1
 
 	kill $hid
 	echo "Clearing process log."

@@ -1,5 +1,4 @@
 text="$1"
-browser=
 
 for var in "$@" 
 do
@@ -9,4 +8,4 @@ do
 	fi
 done
 
-w3m https://google.com/search?q=$text
+firefox https://google.com/search?q=$text &

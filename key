@@ -1,0 +1,6 @@
+echo "| ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | - | = | <-- |"
+echo "| <> | Q | W | F | P | G | J | L | U | Y | ; | [ | ] | \ |"
+echo "| <-- | A | R | S |.T.| D | H |.N.| E | I | O | ' | <__/ |"
+echo "| ^   ^ | Z | X | C | V | B | K | M | , | . | / | ^   ^ |"
+echo "| Ctrl | Alt |           Space           | Alt | Ctrl |"
+

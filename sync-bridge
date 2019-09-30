@@ -1,0 +1,1 @@
+rsync -avr --delete-before /run/media/stuin/OUTER-DISK/* datar:/media/BRIDGE

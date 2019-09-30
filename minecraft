@@ -1,0 +1,2 @@
+screen -dmS mcs bash -c 'bash /media/MESS/home/minecraft/start.bat'
+#screen -r mcs

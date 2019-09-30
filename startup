@@ -1,0 +1,11 @@
+sleep 1
+
+#bspc monitor --add-desktops 5
+#bspc monitor --add-desktops 5
+
+bspc desktop -f '^1'
+
+#conky -c ~/.conky/Gotham/Gotham &
+compton --config ~/.config/compton/compton.conf &
+xfce4-appfinder &
+ssh-check.sh &
