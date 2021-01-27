@@ -28,14 +28,26 @@ Battery() {
 	echo "$BATBAR$BATPERC"
 }
 
+Focus() {
+	swaymsg -t get_tree | jq '.. | (.nodes? // empty)[] | select(.focused==true)' | grep "app_id" | sed 's/  \"app_id\": \"//' | sed 's/\",//'
+	#xdotool getwindowfocus getwindowname
+}
+
+Workspace() {
+	echo $(swaymsg -t get_workspaces) | jq '.[] | select(.focused==true)' | grep "name" | sed 's/  \"name\": \"//' | sed 's/\",//'
+	#echo $(($(xdotool get_desktop) + 1))
+}
+
 LemonDisplay() {
 	TIME=$(date "+%A, %B %d, %Y, %T")
-	BRIGHT=$(xbacklight -get)
+	BRIGHT=$(light -G)
 	BAT=$(Battery)
-	NAME=$(xdotool getwindowfocus getwindowname)
-	DESK=$(($(xdotool get_desktop) + 1))
+	NAME=$(Focus)
+	DESK=$(Workspace)
 	
-	echo "%{F#f9b234}%{B#662382}%{l}%{A:Binc:}%{A3:Bdec:} $BRIGHT $BAT %{A}%{A}%{c}%{A:Dnext:}%{A3:Dlast:} $DESK : $NAME %{A}%{A}%{r}%{A:Exit:} $TIME %{A}%{F-}%{B-}"
+	echo "%{F#EE7600}%{B#333333}%{l} $BRIGHT $BAT %{c} $DESK : $NAME %{r} $TIME %{F-}%{B-}"
+
+	#echo "%{F#f9b234}%{B#662382}%{l}%{A:Binc:}%{A3:Bdec:} $BRIGHT $BAT %{A}%{A}%{c}%{A:Dnext:}%{A3:Dlast:} $DESK : $NAME %{A}%{A}%{r}%{A:Exit:} $TIME %{A}%{F-}%{B-}"
 }
 
 Display() {
@@ -57,13 +69,13 @@ else
 	-i)
 		while $run; do
 			read CODE
-			DESK=$(($(xdotool get_desktop) + 1))
+			DESK=$(Workspace)
 			case $CODE in
 			Binc)
-				xbacklight -inc 5
+				light -A 5
 				;;
 			Bdec)
-				xbacklight -dec 5
+				light -U 5
 				;;
 			Dnext)
 				if [ $DESK == 7 ]; then
@@ -97,7 +109,7 @@ else
 		;;
 	-b)
 		#Start bar and scripts properly
-		bar-loader.sh -o | lemonbar -b -B#333333
+		bar-loader.sh -o | lemonbar -d -b -B#444444 -f "Roboto Medium"
 		;;
 	esac
 fi

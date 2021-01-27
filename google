@@ -8,4 +8,4 @@ do
 	fi
 done
 
-firefox https://google.com/search?q=$text &
+firefox https://google.com/search?q=$text

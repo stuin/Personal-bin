@@ -1,3 +1,0 @@
-g++ *.cpp -std=c++11 -lm -Wall -pthread
-mv a.out /tmp/
-chmod +x /tmp/a.out

@@ -1,0 +1,9 @@
+#sound=virtual_combiner.monitor
+sound=combined.monitor
+
+dis=HDMI-A-2
+#dis=eDP-1
+
+name=$(date +"%b_%d_%Y_%H:%M")
+wf-recorder -o $dis --audio $sound --file ~/Videos/record/$name.mov &
+parecord -d alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_AYM_2018_07_22_30888-00.mono-fallback ~/Videos/record/$name.wav

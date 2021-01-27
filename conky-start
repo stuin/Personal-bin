@@ -1,6 +1,0 @@
-bspc desktop -f '^2'
-conky -c "$1" &
-sleep .5
-
-bspc node newest -t fullscreen
-bspc node newest -l below

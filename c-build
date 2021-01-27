@@ -1,3 +1,0 @@
-gcc *.c -lm -Wall
-mv a.out /tmp
-chmod +x /tmp/a.out

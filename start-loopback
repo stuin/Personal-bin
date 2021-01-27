@@ -1,0 +1,7 @@
+
+pactl load-module module-null-sink sink_name=virtual_combined sink_properties=device.description=Mic+Loopback
+pactl load-module module-null-sink sink_name=virtual_loopback sink_properties=device.description=Loopback
+pactl load-module module-loopback latency_msec=1 sink=virtual_combined source=alsa_input.usb-BLUE_MICROPHONE_Blue_Snowball_AYM_2018_07_22_30888-00.mono-fallback
+pactl load-module module-loopback latency_msec=1 sink=virtual_combined source=virtual_loopback.monitor
+pactl load-module module-loopback latency_msec=1 sink=1 source=virtual_loopback.monitor
+pactl set-default-source virtual_combined.monitor

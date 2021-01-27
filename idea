@@ -1,3 +1,0 @@
-export PATH="$PATH:/home/stuin/bin"
-export _JAVA_AWT_WM_NONREPORTING=1
-/home/stuin/bin/idea.sh

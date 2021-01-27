@@ -1,4 +1,4 @@
-term="xfce4-terminal -x"
+term="kitty"
 
 hex() {
 	#Random hex values with some selected

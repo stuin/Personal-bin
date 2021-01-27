@@ -12,6 +12,6 @@ if [[ $? -eq 0 ]]; then
 		echo "Data Server Detected"
 	else
 		echo "Data Server not found"
-		notify-send 'Lieutenant Commander Data' 'Connection lost: Check remote ip.' --icon=dialog-information
+		notify-send 'Lieutenant Commander Data' 'Connection lost: Check remote ip.' -i dialog-information -t 2000
 	fi
 fi
